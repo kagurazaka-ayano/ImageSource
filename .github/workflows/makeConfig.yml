@@ -16,9 +16,9 @@ jobs:
     - uses: actions/checkout@v3            
     - name: Make config for ShokaX config 
       run: |
-        files=$(ls ${{env.home}}/PersonalWebsite | grep ".png" | tr -d " ")
+        files=$(ls $PWD/PersonalWebsite | grep ".png" | tr -d " ")
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
-        out=${{env.home}}/PersonalWebsite/image.yml
+        out=$PWD/PersonalWebsite/image.yml
         touch $out
         chmod 777 $out
         > $out
