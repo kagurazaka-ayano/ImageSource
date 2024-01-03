@@ -18,11 +18,11 @@ jobs:
 
       - name: Make config for ShokaX config
         run: |
-          files=$(ls $PWD/PersonalWebsite | grep ".png" | tr -d " ")
+          files=$(ls PersonalWebsite | grep ".png" | tr -d " ")
           echo $files
           root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
           echo $root
-          out=$PWD/PersonalWebsite/image.yml
+          out=PersonalWebsite/image.yml
           echo $out
           touch $out
           chmod 777 $out
