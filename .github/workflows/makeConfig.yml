@@ -1,4 +1,3 @@
-
 name: Make image config
 
 on:
@@ -14,21 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      - uses: actions/checkout@v3            
-      - name: Make config for ShokaX config  
-      - uses: GuillaumeFalourd/command-output-file-action@v1.1
-        with:
-          command_line: | 
-            files=$(ls ${{env.home}}/PersonalWebsite | grep ".png" | tr -d " ")
-            root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
-            out=${{env.home}}/PersonalWebsite/image.yml
-            touch $out
-            chmod 777 $out
-            > $out
-            for file in $files
-            do
-                echo "- $root$file"
-            done
-          output_file_name: PersonalWebsite/image.yml
-          display_file_content: YES 
+    - uses: actions/checkout@v3            
+    - name: Make config for ShokaX config 
+      run: |
+        files=$(ls ${{env.home}}/PersonalWebsite | grep ".png" | tr -d " ")
+        root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
+        out=${{env.home}}/PersonalWebsite/image.yml
+        touch $out
+        chmod 777 $out
+        > $out
+        for file in $files
+        do
+            echo "- $root$file">>$out
+        done
+    - name: Commit file
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "github-actions"
+        git add --all
+        if [-z "$(git status --porcelain)"]; then
+          echo "::set-output name=push::false"
+        else
+          git commit -m "Add changes" -a
+          echo "::set-output name=push::true"
+        fi
+      shell: bash
+    - name: Push changes
+      if: steps.commit.outputs.push == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
