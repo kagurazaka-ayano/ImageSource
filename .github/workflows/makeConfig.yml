@@ -18,13 +18,13 @@ jobs:
       run: |
         files=$(ls $PWD/PersonalWebsite | grep ".png" | tr -d " ")
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
-        out=$PWD/PersonalWebsite/image.yml
+        out=$PWD/PersonalWebsite/images.yml
         touch $out
         chmod 777 $out
         > $out
         for file in $files
         do
-            echo "- $root$file">>$out
+            echo "- $root$file?raw=true">>$out
         done
     - name: Commit file
       run: |
