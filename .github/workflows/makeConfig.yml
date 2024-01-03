@@ -14,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
 
       - name: Make config for ShokaX config
+      - uses: actions/checkout@v3
+      - uses: GuillaumeFalourd/command-output-file-action@v1.1
         with:
           command_line: | 
             files=$(ls ${{env.home}}/PersonalWebsite | grep ".png" | tr -d " ")
