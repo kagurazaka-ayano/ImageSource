@@ -20,7 +20,7 @@ jobs:
         run: |
           files=$(ls $PWD/PersonalWebsite | grep ".png" | tr -d " ")
           echo $files
-          root="https://github.com/kagurazaka-ayano/ImageSource/blob/$1/PersonalWebsite/"
+          root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
           echo $root
           out=$PWD/PersonalWebsite/image.yml
           echo $out
