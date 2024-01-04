@@ -18,7 +18,7 @@ jobs:
       run: |
         files=$(ls $PWD/PersonalWebsite | grep ".png" | tr -d " ")
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
-        out=$PWD/PersonalWebsite/images.yml
+        out=$PWD/PersonalWebsite/image.yml
         touch $out
         chmod 777 $out
         > $out
