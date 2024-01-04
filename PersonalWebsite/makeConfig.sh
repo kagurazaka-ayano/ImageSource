@@ -1,6 +1,7 @@
 # !/usr/bin/env bash
 files=$(ls | grep ".png" | tr -d " ")
-root="https://github.com/kagurazaka-ayano/ImageSource/blob/$1/PersonalWebsite/"
+commit=$(git rev-parse HEAD)
+root="https://github.com/kagurazaka-ayano/ImageSource/blob/$commit/PersonalWebsite/"
 out=images.yml
 touch $out
 chmod 777 $out

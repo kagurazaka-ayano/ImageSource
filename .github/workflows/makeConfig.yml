@@ -17,14 +17,18 @@ jobs:
     - name: Make config for ShokaX config 
       run: |
         files=$(ls $PWD/PersonalWebsite | grep ".png" | tr -d " ")
+        echo $files
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
-        out=$PWD/PersonalWebsite/image.yml
+        echo $root
+        out=$PWD/PersonalWebsite/images.yml
+        echo $out
         touch $out
         chmod 777 $out
         > $out
         for file in $files
         do
-            echo "- $root$file?raw=true">>$out
+          echo "- $root$file?raw=true"
+          echo "- $root$file?raw=true">>$out
         done
     - name: Commit file
       run: |
