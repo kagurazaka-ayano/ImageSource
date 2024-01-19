@@ -8,7 +8,9 @@ on:
 
   workflow_dispatch:
 
-
+permissions:                    # Global permissions configuration starts here
+  contents: read                # 'read' access to repository contents
+  pull-requests: write          # 'write' access to pull requests
 
 jobs:
   build_config:
@@ -35,10 +37,15 @@ jobs:
         write-mode: overwrite
         contents: |
           ${{ env.FILE_STR }}
-    - name: Push
-      uses: Andro999b/push@v1.3
+    - name: Commit files
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add --all
+        git commit -a -m "Add changes"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
-        message: 'Update images - ${date}'
+        branch: ${{ github.ref }}
         force: true
