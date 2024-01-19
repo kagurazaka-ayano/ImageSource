@@ -28,8 +28,8 @@ jobs:
         echo $files
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
         echo $root
-        for file in $files
         out=""
+        for file in $files
         do
           echo "- $root$file?raw=true"
           echo "- $root$file?raw=true">> out
