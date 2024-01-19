@@ -29,7 +29,7 @@ jobs:
         for file in $files
         do
           echo "- $root$file?raw=true"
-          echo "- $root$file?raw=true">> $GITHUB_OUTPUT
+          echo "- $root$file?raw=true">> "$GITHUB_OUTPUT"
         done
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
