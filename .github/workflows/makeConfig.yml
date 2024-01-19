@@ -35,16 +35,10 @@ jobs:
         write-mode: overwrite
         contents: |
           ${{ env.FILE_STR }}
-    - name: Commit file
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "github-actions"
-        git add --all
-        git commit -m "Add changes" -a
-        echo "{push}={true}" >> $GITHUB_STATE
-      shell: bash
-    - name: Push changes
-      if: steps.commit.GITHUB_STATE == '{push}={true}'
-      uses: ad-m/github-push-action@master
+    - name: Push
+      uses: Andro999b/push@v1.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+        message: 'Update images - ${date}'
+        force: true
