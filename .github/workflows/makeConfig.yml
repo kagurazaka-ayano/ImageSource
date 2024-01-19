@@ -21,6 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3            
     - name: Make config for ShokaX config 
+      id: make_config
       run: |
         files=$(ls $PWD/PersonalWebsite | grep ".png" | tr -d " ")
         echo $files
@@ -29,15 +30,15 @@ jobs:
         for file in $files
         do
           echo "- $root$file?raw=true"
-          echo "- $root$file?raw=true">> vars.FILE_STR
+          echo "- $root$file?raw=true">> $GITHUB_OUTPUT
         done
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
       with:
         path: PersonalWebsite/config.yml
         write-mode: overwrite
-        contents: |
-          ${{ env.FILE_STR }}
+        contents: ${{ steps.make_config.outputs.config }}
+
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
