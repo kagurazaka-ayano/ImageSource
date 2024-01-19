@@ -30,7 +30,7 @@ jobs:
         for file in $files
         do
           echo "- $root$file?raw=true"
-          echo "- $root$file?raw=true">> out
+          echo "- $root$file?raw=true">> images
         done
         echo "content=$images" >> $GITHUB_OUTPUT
     - name: Overwrite file
