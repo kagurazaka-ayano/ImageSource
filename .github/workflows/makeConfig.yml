@@ -26,12 +26,11 @@ jobs:
         echo $files
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
         echo $root
-        cd PersonalWebsite
-        touch "images.yml"
+        images=""
         for file in $files
         do
           echo "- $root$file?raw=true"
-          echo "- $root$file?raw=true">> "images.yml"
+          echo "- $root$file?raw=true">> out
         done
         echo "content=$images" >> $GITHUB_OUTPUT
     - name: Overwrite file
