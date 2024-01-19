@@ -36,8 +36,8 @@ jobs:
       with:
         path: PersonalWebsite/config.yml
         write-mode: overwrite
-        contents: ${{ steps.make_config.outputs.config }}
-
+        contents: |
+          ${{ steps.make_config.outputs.config }}
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
