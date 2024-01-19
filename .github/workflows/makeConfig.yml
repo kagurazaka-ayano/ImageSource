@@ -8,10 +8,13 @@ on:
 
   workflow_dispatch:
 
+
+
 jobs:
   build_config:
     runs-on: ubuntu-latest
-
+    env:
+      FILE_STR: 
     steps:
     - uses: actions/checkout@v3            
     - name: Make config for ShokaX config 
@@ -20,16 +23,18 @@ jobs:
         echo $files
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
         echo $root
-        out=$PWD/PersonalWebsite/images.yml
-        echo $out
-        touch $out
-        chmod 777 $out
-        > $out
         for file in $files
         do
           echo "- $root$file?raw=true"
-          echo "- $root$file?raw=true">>$out
+          echo "- $root$file?raw=true">> ${{ env.FILE_STR }}
         done
+    - name: Overwrite file
+      uses: "DamianReeves/write-file-action@master"
+      with:
+        path: $HOME/PersonalWebsite/config.yml
+        write-mode: overwrite
+        contents: |
+          ${{ env.FILE_STR }}
     - name: Commit file
       run: |
         git config --local user.email "action@github.com"
