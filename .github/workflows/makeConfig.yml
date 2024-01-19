@@ -41,7 +41,7 @@ jobs:
         path: PersonalWebsite/config.yml
         write-mode: overwrite
         contents: |
-          ${{ needs.build_config.outputs.config }}
+          ${{ needs.build_config.GITHUB_OUTPUT }}
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
