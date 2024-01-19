@@ -14,7 +14,7 @@ jobs:
   build_config:
     runs-on: ubuntu-latest
     env:
-      FILE_STR: 
+      FILE_STR: ""
     steps:
     - uses: actions/checkout@v3            
     - name: Make config for ShokaX config 
