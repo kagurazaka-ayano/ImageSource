@@ -41,10 +41,10 @@ jobs:
         git config --local user.name "github-actions"
         git add --all
         git commit -m "Add changes" -a
-        echo "::set-output name=push::true"
+        echo "{push}={true}" >> $GITHUB_STATE
       shell: bash
     - name: Push changes
-      if: steps.commit.outputs.push == 'true'
+      if: steps.commit.GITHUB_STATE == '{push}={true}'
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
