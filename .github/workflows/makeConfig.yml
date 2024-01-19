@@ -26,7 +26,7 @@ jobs:
         for file in $files
         do
           echo "- $root$file?raw=true"
-          echo "- $root$file?raw=true">> ${{ env.FILE_STR }}
+          echo "- $root$file?raw=true">> env.FILE_STR
         done
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
