@@ -26,13 +26,13 @@ jobs:
         echo $files
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
         echo $root
-        image.y=""
+        images.yml=""
         for file in $files
         do
           echo "- $root$file?raw=true"
           echo "- $root$file?raw=true">> out
         done
-        echo "content=$out" >> $GITHUB_OUTPUT
+        echo "content=$images.yml" >> $GITHUB_OUTPUT
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
       with:
