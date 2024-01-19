@@ -26,7 +26,7 @@ jobs:
         echo $files
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
         echo $root
-        out=""
+        image.y=""
         for file in $files
         do
           echo "- $root$file?raw=true"
@@ -36,7 +36,7 @@ jobs:
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
       with:
-        path: PersonalWebsite/config.yml
+        path: PersonalWebsite/images.yml
         write-mode: overwrite
         contents: |
           ${{ steps.make_config.outputs.content }}
