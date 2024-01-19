@@ -29,9 +29,12 @@ jobs:
         root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
         echo $root
         for file in $files
+        out=""
         do
-          echo "config = $config\n- $root$file?raw=true" >> "$GITHUB_OUTPUT"
+          echo "- $root$file?raw=true"
+          echo "- $root$file?raw=true">> out
         done
+        echo "config=$out" >> "$GITHUB_OUTPUT"
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
       with:
