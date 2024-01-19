@@ -33,16 +33,13 @@ jobs:
           echo "- $root$file?raw=true">> out
         done
         echo "content=$out" >> $GITHUB_OUTPUT
-  write_config:
-    runs-on: ubuntu-latest
-    steps:
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
       with:
         path: PersonalWebsite/config.yml
         write-mode: overwrite
         contents: |
-          ${{ needs.build_config.out }}
+          ${{ steps.make_config.outputs.content }}
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
