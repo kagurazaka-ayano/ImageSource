@@ -15,10 +15,8 @@ permissions:
 jobs:
   build_config:
     outputs:
-      output1: ${{ steps.make_config.outputs.config }}
+      file_content: ${{ steps.make_config.outputs.content }}
     runs-on: ubuntu-latest
-    env:
-      FILE_STR: "\n"
     steps:
     - uses: actions/checkout@v3            
     - name: Make config for ShokaX config 
@@ -34,14 +32,17 @@ jobs:
           echo "- $root$file?raw=true"
           echo "- $root$file?raw=true">> out
         done
-        echo "config=$out" >> "$GITHUB_OUTPUT"
+        echo "content=$out" >> $GITHUB_OUTPUT
+  write_config:
+    runs-on: ubuntu-latest
+    steps:
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
       with:
         path: PersonalWebsite/config.yml
         write-mode: overwrite
         contents: |
-          ${{ needs.build_config.GITHUB_OUTPUT }}
+          ${{ needs.build_config.out }}
     - name: Commit files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
