@@ -23,7 +23,7 @@ jobs:
       id: make_config
       run: |
         files=$(ls $PWD | grep ".png" | tr -d " ")
-        root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/PersonalWebsite/"
+        root="https://github.com/kagurazaka-ayano/ImageSource/blob/${{github.sha}}/"
         for file in $files
         do
           echo "- $root$file?raw=true">> out
